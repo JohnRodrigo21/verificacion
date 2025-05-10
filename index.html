@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Verificación QR</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      background-color: #f0f8f5;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .codigo {
+      font-size: 32px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<div class="codigo" id="codigo"></div>
+
+<script>
+  // Leer parámetros de la URL
+  const params = new URLSearchParams(window.location.search);
+  const auth = params.get('auth');
+
+  if (auth === 'admin123') {
+    // Mensaje para organizador autorizado
+    Swal.fire({
+      title: '¡Verificación Exitosa!',
+      text: 'Acceso autorizado como organizador',
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#28a745'
+    });
+  } else {
+    // Mostrar código aleatorio para los demás
+    const codigo = Math.floor(100000 + Math.random() * 900000); // 6 dígitos
+    document.getElementById('codigo').innerText = `Código de control: ${codigo}`;
+  }
+</script>
+
+</body>
+</html>
